@@ -17,20 +17,44 @@ class Forecast {
     
     var weatherConditionsStatus: UIImage
     var weatherConditionsDescription: String
-    var temperature: Int
+    var temperature: Double
     
     var pressure: Double
     var humidity: Int
-    var windSpeed: Int
+    var windSpeed: Double
     var cloudCoverage: Int
+    
+    var dateTimeString: String {
+        return dateTime.toString(dateFormat: "HH:mm")
+    }
+    
+    var temperatureString: String {
+        return String(format: "%d° F", Int(temperature))
+    }
+    
+    var pressureString: String {
+        return String(format: "%d hPa", Int(pressure))
+    }
+    
+    var humidityString: String {
+        return String(format: "%d%%", humidity)
+    }
+    
+    var windString: String {
+        return String(format: "%d km/h", Int(windSpeed))
+    }
+    
+    var cloudCoverageString: String {
+        return String(format: "%d%%", cloudCoverage)
+    }
     
     init(dateTime: Date,
          weatherConditionsStatus: UIImage,
          weatherConditionsDescription: String,
-         temperature: Int,
+         temperature: Double,
          pressure: Double,
          humidity: Int,
-         windSpeed: Int,
+         windSpeed: Double,
          cloudCoverage: Int) {
         
         self.dateTime = dateTime

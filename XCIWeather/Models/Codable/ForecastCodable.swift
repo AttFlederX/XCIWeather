@@ -1,5 +1,5 @@
 //
-//  WindCodable.swift
+//  ForecastCodable.swift
 //  XCIWeather
 //
 //  Created by Dmytro on 7/18/19.
@@ -8,7 +8,6 @@
 
 import Foundation
 
-struct WindCodable : Codable {
-    let speed: Double
-    let deg: Double
+struct ForecastCodable : Codable {
+    let list: [ForecastItemCodable]
 }

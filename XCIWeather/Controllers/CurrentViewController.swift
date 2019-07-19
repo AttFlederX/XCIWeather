@@ -51,7 +51,7 @@ class CurrentViewController: UIViewController {
                                                     location: "\(modelData.name), \(modelData.sys.country)",
                                                     dateTime: Date(timeIntervalSince1970: TimeInterval(modelData.dt)),
                                                     weatherConditionsStatus: UIImage(named: "weather_\(modelData.weather.first?.icon ?? "01_d")")!,
-                                                    weatherConditionsDescription: modelData.weather.first!.main,
+                                                    weatherConditionsDescription: modelData.weather.first!.description,
                                                     temperature: modelData.main.temp,
                                                     pressure: modelData.main.pressure,
                                                     humidity: modelData.main.humidity,

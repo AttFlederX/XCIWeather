@@ -34,15 +34,15 @@ class ForecastCell: UITableViewCell {
 
     
     func setForecastCellData(forecastData: Forecast) {
-        timeLabel.text = forecastData.dateTime.toString(dateFormat: "hh:mm");
+        timeLabel.text = forecastData.dateTimeString;
         
         weatherConditionsImageView.image = forecastData.weatherConditionsStatus
         weatherConditionsLabel.text = forecastData.weatherConditionsDescription
-        temperatureLabel.text = String(format: "%d° F", forecastData.temperature)
+        temperatureLabel.text = forecastData.temperatureString
         
-        pressureLabel.text = String(format: "%.2f inHg", forecastData.pressure)
-        humidityLabel.text = String(format: "%d%%", forecastData.humidity)
-        windLabel.text = String(format: "%d kts", forecastData.windSpeed)
-        cloudCoverageLabel.text = String(format: "%d%%", forecastData.cloudCoverage)
+        pressureLabel.text = forecastData.pressureString
+        humidityLabel.text = forecastData.humidityString
+        windLabel.text = forecastData.windString
+        cloudCoverageLabel.text = forecastData.cloudCoverageString
     }
 }

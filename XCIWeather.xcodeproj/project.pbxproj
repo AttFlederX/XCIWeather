@@ -26,6 +26,8 @@
 		6641B34F22E0847D0014C94E /* WindCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6641B34E22E0847D0014C94E /* WindCodable.swift */; };
 		6641B35122E084D40014C94E /* CloudsCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6641B35022E084D40014C94E /* CloudsCodable.swift */; };
 		6641B35322E085120014C94E /* SysCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6641B35222E085120014C94E /* SysCodable.swift */; };
+		6641B35522E0B16E0014C94E /* ForecastCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6641B35422E0B16E0014C94E /* ForecastCodable.swift */; };
+		6641B35722E0B1EC0014C94E /* ForecastItemCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6641B35622E0B1EC0014C94E /* ForecastItemCodable.swift */; };
 		6688344622BB825800359CBC /* ForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6688344522BB825800359CBC /* ForecastCell.swift */; };
 		6688344922BB83B500359CBC /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6688344822BB83B500359CBC /* Forecast.swift */; };
 		6688344C22BB86E600359CBC /* ForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6688344B22BB86E600359CBC /* ForecastViewController.swift */; };
@@ -54,6 +56,8 @@
 		6641B34E22E0847D0014C94E /* WindCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindCodable.swift; sourceTree = "<group>"; };
 		6641B35022E084D40014C94E /* CloudsCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudsCodable.swift; sourceTree = "<group>"; };
 		6641B35222E085120014C94E /* SysCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SysCodable.swift; sourceTree = "<group>"; };
+		6641B35422E0B16E0014C94E /* ForecastCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastCodable.swift; sourceTree = "<group>"; };
+		6641B35622E0B1EC0014C94E /* ForecastItemCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastItemCodable.swift; sourceTree = "<group>"; };
 		6688344522BB825800359CBC /* ForecastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastCell.swift; sourceTree = "<group>"; };
 		6688344822BB83B500359CBC /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 		6688344B22BB86E600359CBC /* ForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +131,7 @@
 			children = (
 				6641B34922E083030014C94E /* ObjectStructs */,
 				6641B34722E082BF0014C94E /* CurrentWeatherCodable.swift */,
+				6641B35422E0B16E0014C94E /* ForecastCodable.swift */,
 			);
 			path = Codable;
 			sourceTree = "<group>";
@@ -139,6 +144,7 @@
 				6641B34E22E0847D0014C94E /* WindCodable.swift */,
 				6641B35022E084D40014C94E /* CloudsCodable.swift */,
 				6641B35222E085120014C94E /* SysCodable.swift */,
+				6641B35622E0B1EC0014C94E /* ForecastItemCodable.swift */,
 			);
 			path = ObjectStructs;
 			sourceTree = "<group>";
@@ -255,6 +261,7 @@
 			files = (
 				6641B33D22E06FDA0014C94E /* CurrentViewController.swift in Sources */,
 				6688344922BB83B500359CBC /* Forecast.swift in Sources */,
+				6641B35722E0B1EC0014C94E /* ForecastItemCodable.swift in Sources */,
 				6641B33922E06D5E0014C94E /* WeatherService.swift in Sources */,
 				6641B34322E07B120014C94E /* NotificationNames.swift in Sources */,
 				6641B35122E084D40014C94E /* CloudsCodable.swift in Sources */,
@@ -262,6 +269,7 @@
 				6641B33B22E06DF40014C94E /* LocationService.swift in Sources */,
 				6641B34822E082BF0014C94E /* CurrentWeatherCodable.swift in Sources */,
 				6641B33F22E070210014C94E /* TabBarViewController.swift in Sources */,
+				6641B35522E0B16E0014C94E /* ForecastCodable.swift in Sources */,
 				6641B33622E068C70014C94E /* ConstantHelper.swift in Sources */,
 				6688344F22BB975000359CBC /* DateExtension.swift in Sources */,
 				6641B34B22E0831E0014C94E /* WeatherCodable.swift in Sources */,

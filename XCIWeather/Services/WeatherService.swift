@@ -13,6 +13,17 @@ class WeatherService {
     static func getCurrentWeather(lat: Double, long: Double, completed: @escaping (_ jsonData: Data) -> Void) {
         let url = URL(string: String(format: ConstantHelper.baseWeatherApiUrl, lat, long, ConstantHelper.apiKey))!
         
+        getJsonData(url: url, completed: completed)
+    }
+    
+    static func getForecast(lat: Double, long: Double, completed: @escaping (_ jsonData: Data) -> Void) {
+        let url = URL(string: String(format: ConstantHelper.baseWeatherApiForecastUrl, lat, long, ConstantHelper.apiKey))!
+        
+        getJsonData(url: url, completed: completed)
+    }
+    
+    
+    static private func getJsonData(url: URL, completed: @escaping (_ jsonData: Data) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             let httpResponse = response as! HTTPURLResponse
             

@@ -10,32 +10,72 @@ import UIKit
 
 class ForecastViewController: UIViewController {
 
-    @IBOutlet weak var forecastTableVIew: UITableView!
+    @IBOutlet weak var forecastTableView: UITableView!
+    
+    let decoder = JSONDecoder();
     
     var forecastData: [Forecast] = []
     var dateSections: [Date] = []
     var groupedForecastData: [(key: Date, value: [Forecast])] = []
     
+    var isInitDataReceived: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        forecastData = getForecastData().sorted(by: { $0.dateTime < $1.dateTime })
-        groupedForecastData = Dictionary(grouping: forecastData, by: { fcd in fcd.dateTime.truncateDate() })
-            .sorted(by: { $0.key < $1.key })
-        //dateSections = Array(groupedForecastData.keys) // move keys into an ordered list
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateForecastData),
+                                               name: .locationUpdated,
+                                               object: nil)
+        
+        if !isInitDataReceived {
+            updateForecastData()
+        }
     }
     
-    func getForecastData() -> [Forecast] {
-        var mockData: [Forecast] = []
+
+    @objc private func updateForecastData() {
+        WeatherService.getForecast(lat: LocationService.currentLocationLatitude, long: LocationService.currentLocationLongitude,
+                                         completed: {jsonData in
+                                            do {
+                                                let modelData = try self.decoder.decode(ForecastCodable.self, from: jsonData)
+                                                
+                                                // convert to DTO model
+                                                self.forecastData = []
+                                                
+                                                for forecastItem in modelData.list {
+                                                    
+                                                    self.forecastData.append(Forecast(
+                                                        dateTime: Date(timeIntervalSince1970: TimeInterval(forecastItem.dt)),
+                                                        weatherConditionsStatus: UIImage(named: "weather_\(forecastItem.weather.first?.icon ?? "01_d")")!,
+                                                        weatherConditionsDescription: forecastItem.weather.first!.description,
+                                                        temperature: forecastItem.main.temp,
+                                                        pressure: forecastItem.main.pressure,
+                                                        humidity: forecastItem.main.humidity,
+                                                        windSpeed: forecastItem.wind.speed,
+                                                        cloudCoverage: forecastItem.clouds.all))
+                                                    
+                                                }
+                                                
+                                                self.updateForecastUi()
+                                                
+                                                if (!self.isInitDataReceived) {
+                                                    self.isInitDataReceived = true
+                                                }
+                                            }
+                                            catch let error {
+                                                print("Failed to parse JSON: \(error.localizedDescription)")
+                                            }
+        })
+    }
+    
+    func updateForecastUi() {
+        forecastData = forecastData.sorted(by: { $0.dateTime < $1.dateTime })
+        groupedForecastData = Dictionary(grouping: forecastData, by: { fcd in fcd.dateTime.truncateDate() })
+            .sorted(by: { $0.key < $1.key })
         
-        mockData.append(Forecast(dateTime: Date(timeIntervalSinceNow: 1000), weatherConditionsStatus: #imageLiteral(resourceName: "weather_01d"), weatherConditionsDescription: "Clear", temperature: 85, pressure: 29.92, humidity: 58, windSpeed: 15, cloudCoverage: 5))
-        
-        mockData.append(Forecast(dateTime: Date(timeIntervalSinceNow: 2000), weatherConditionsStatus: #imageLiteral(resourceName: "weather_04d"), weatherConditionsDescription: "Light clouds", temperature: 85, pressure: 29.92, humidity: 58, windSpeed: 15, cloudCoverage: 5))
-        
-        mockData.append(Forecast(dateTime: Date(timeIntervalSince1970: 575000000), weatherConditionsStatus: #imageLiteral(resourceName: "weather_03n"), weatherConditionsDescription: "Overcast", temperature: 85, pressure: 29.92, humidity: 58, windSpeed: 15, cloudCoverage: 5))
-        
-        return mockData
+        forecastTableView.reloadData()
     }
 
 }

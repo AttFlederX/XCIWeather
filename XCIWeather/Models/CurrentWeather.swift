@@ -22,7 +22,7 @@ class CurrentWeather {
     
     var pressure: Double
     var humidity: Int
-    var windHeading: Int
+    var windHeading: Double
     var windSpeed: Double
     var cloudCoverage: Int
     
@@ -38,7 +38,7 @@ class CurrentWeather {
     }
     
     var pressureString: String {
-        return String(format: "%d hPa", pressure)
+        return String(format: "%d hPa", Int(pressure))
     }
     
     var humidityString: String {
@@ -46,7 +46,7 @@ class CurrentWeather {
     }
     
     var windString: String {
-        return String(format: "%d° @ %d km/h", windHeading, Int(windSpeed))
+        return String(format: "%d° @ %d km/h", Int(windHeading), Int(windSpeed))
     }
     
     var cloudCoverageString: String {
@@ -68,7 +68,7 @@ class CurrentWeather {
          temperature: Double,
          pressure: Double,
          humidity: Int,
-         windHeading: Int,
+         windHeading: Double,
          windSpeed: Double,
          cloudCoverage: Int,
          sunriseTime: Date,
