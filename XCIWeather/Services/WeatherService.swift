@@ -25,7 +25,10 @@ class WeatherService {
     
     static private func getJsonData(url: URL, completed: @escaping (_ jsonData: Data) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            let httpResponse = response as! HTTPURLResponse
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("Response null")
+                return
+            }
             
             if let type = httpResponse.mimeType, type == "application/json",
                 let data = data,

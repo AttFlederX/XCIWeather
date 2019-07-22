@@ -10,4 +10,5 @@ import Foundation
 
 struct ForecastCodable : Codable {
     let list: [ForecastItemCodable]
+    let city: CityCodable
 }

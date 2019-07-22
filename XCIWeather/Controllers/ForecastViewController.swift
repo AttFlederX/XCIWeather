@@ -24,6 +24,9 @@ class ForecastViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        // remove footer
+        forecastTableView.tableFooterView = UIView(frame: .zero)
+        
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateForecastData),
                                                name: .locationUpdated,
@@ -47,7 +50,8 @@ class ForecastViewController: UIViewController {
                                                 for forecastItem in modelData.list {
                                                     
                                                     self.forecastData.append(Forecast(
-                                                        dateTime: Date(timeIntervalSince1970: TimeInterval(forecastItem.dt)),
+                                                        dateTime: Date(timeIntervalSince1970: TimeInterval(forecastItem.dt))
+                                                            .toTimeZone(utcOffset: modelData.city.timezone),
                                                         weatherConditionsStatus: UIImage(named: "weather_\(forecastItem.weather.first?.icon ?? "01_d")")!,
                                                         weatherConditionsDescription: forecastItem.weather.first!.description,
                                                         temperature: forecastItem.main.temp,

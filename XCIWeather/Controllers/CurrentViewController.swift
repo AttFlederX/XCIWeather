@@ -55,7 +55,7 @@ class CurrentViewController: UIViewController {
                                                     temperature: modelData.main.temp,
                                                     pressure: modelData.main.pressure,
                                                     humidity: modelData.main.humidity,
-                                                    windHeading: modelData.wind.deg,
+                                                    windHeading: modelData.wind.deg ?? 0,
                                                     windSpeed: modelData.wind.speed,
                                                     cloudCoverage: modelData.clouds.all,
                                                     sunriseTime: Date(timeIntervalSince1970: TimeInterval(modelData.sys.sunrise))
