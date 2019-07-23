@@ -29,23 +29,23 @@ class Forecast {
     }
     
     var temperatureString: String {
-        return String(format: "%d° F", Int(temperature))
+        return "\(SettingsHelper.getTempInUnits(kelvinTemp: temperature))° \(SettingsHelper.tempUnits.prefix(1))"
     }
     
     var pressureString: String {
-        return String(format: "%d hPa", Int(pressure))
+        return "\(SettingsHelper.getPressureInUnits(hPaPressure: pressure)) \(SettingsHelper.pressureUnits)"
     }
     
     var humidityString: String {
-        return String(format: "%d%%", humidity)
+        return "\(humidity)%"
     }
     
     var windString: String {
-        return String(format: "%d km/h", Int(windSpeed))
+        return "\(SettingsHelper.getSpeedInUnits(mpsSpeed: windSpeed)) \(SettingsHelper.speedUnits)"
     }
     
     var cloudCoverageString: String {
-        return String(format: "%d%%", cloudCoverage)
+        return "\(cloudCoverage)%"
     }
     
     init(dateTime: Date,

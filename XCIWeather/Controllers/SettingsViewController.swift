@@ -11,6 +11,7 @@ import UIKit
 class SettingsViewController: UIViewController {
     
     @IBOutlet weak var settingPicker: UIPickerView!
+    @IBOutlet weak var saveActionToolbar: UIToolbar!
     
     @IBOutlet weak var tableViewContainer: UIView!
     
@@ -19,10 +20,6 @@ class SettingsViewController: UIViewController {
     let speedUnits = ["km/h", "mph", "kts"]
 
     var selectedSetting: SettingOption = .none
-    
-    var tempUnitsSetting: UILabel!
-    var pressureUnitsSetting: UILabel!
-    var speedUnitsSetting: UILabel!
     
     var tableViewController: SettingsTableViewController!
     
@@ -33,13 +30,51 @@ class SettingsViewController: UIViewController {
         settingPicker.delegate = self
         settingPicker.dataSource = self
         settingPicker.isHidden = true
+        
+        saveActionToolbar.isHidden = true
     }
     
     func setupPicker(setting: SettingOption) {
         selectedSetting = setting
-        settingPicker.isHidden = false
         
         settingPicker.reloadAllComponents()
+        // get items to select from settings
+        switch selectedSetting {
+        case .temp:
+            print(tempUnits.firstIndex(of: SettingsHelper.tempUnits)!)
+            settingPicker.selectRow(tempUnits.firstIndex(of: SettingsHelper.tempUnits)!, inComponent: 0, animated: false)
+        case .pressure:
+            settingPicker.selectRow(pressureUnits.firstIndex(of: SettingsHelper.pressureUnits)!, inComponent: 0, animated: false)
+        case .speed:
+            print(speedUnits.firstIndex(of: SettingsHelper.speedUnits)!)
+            settingPicker.selectRow(speedUnits.firstIndex(of: SettingsHelper.speedUnits)!, inComponent: 0, animated: false)
+        default:
+            return
+        }
+        
+        settingPicker.isHidden = false
+        saveActionToolbar.isHidden = false
+        
+    }
+    
+    @IBAction func doneBarButton_TouchUpInside(_ sender: UIBarButtonItem) {
+        let row = settingPicker.selectedRow(inComponent: 0)
+        settingPicker.isHidden = true
+        saveActionToolbar.isHidden = true
+        
+        // save to settings
+        switch selectedSetting {
+        case .temp:
+            SettingsHelper.tempUnits = tempUnits[row]
+        case .pressure:
+            SettingsHelper.pressureUnits = pressureUnits[row]
+        case .speed:
+            SettingsHelper.speedUnits = speedUnits[row]
+        default:
+            return
+        }
+        
+        selectedSetting = .none
     }
     
     // MARK: - Navigation
@@ -69,6 +104,10 @@ class SettingsTableViewController : UITableViewController {
         tableView.delegate = self
         // remove empty cell separators
         tableView.tableFooterView = UIView(frame: .zero)
+        
+        tempUnitsSetting.text = SettingsHelper.tempUnits
+        pressureUnitsSetting.text = SettingsHelper.pressureUnits
+        speedUnitsSetting.text = SettingsHelper.speedUnits
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

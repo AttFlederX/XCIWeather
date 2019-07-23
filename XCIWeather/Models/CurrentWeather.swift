@@ -34,23 +34,23 @@ class CurrentWeather {
     }
     
     var temperatureString: String {
-        return String(format: "%d° F", Int(temperature))
+        return "\(SettingsHelper.getTempInUnits(kelvinTemp: temperature))° \(SettingsHelper.tempUnits.prefix(1))"
     }
     
     var pressureString: String {
-        return String(format: "%d hPa", Int(pressure))
+        return "\(SettingsHelper.getPressureInUnits(hPaPressure: pressure)) \(SettingsHelper.pressureUnits)"
     }
     
     var humidityString: String {
-        return String(format: "%d%%", humidity)
+        return "\(humidity)%"
     }
     
     var windString: String {
-        return String(format: "%d° @ %d km/h", Int(windHeading), Int(windSpeed))
+        return "\(Int(windHeading))° @ \(SettingsHelper.getSpeedInUnits(mpsSpeed: windSpeed)) \(SettingsHelper.speedUnits)"
     }
     
     var cloudCoverageString: String {
-        return String(format: "%d%%", cloudCoverage)
+        return "\(cloudCoverage)%"
     }
     
     var sunriseTimeString: String {

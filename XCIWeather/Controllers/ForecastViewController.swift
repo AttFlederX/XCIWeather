@@ -32,6 +32,12 @@ class ForecastViewController: UIViewController {
                                                name: .locationUpdated,
                                                object: nil)
         
+        // observe measurement unit settings change
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateForecastUi),
+                                               name: UserDefaults.didChangeNotification,
+                                               object: nil)
+        
         if !isInitDataReceived {
             updateForecastData()
         }
@@ -74,7 +80,7 @@ class ForecastViewController: UIViewController {
         })
     }
     
-    func updateForecastUi() {
+    @objc func updateForecastUi() {
         forecastData = forecastData.sorted(by: { $0.dateTime < $1.dateTime })
         groupedForecastData = Dictionary(grouping: forecastData, by: { fcd in fcd.dateTime.truncateDate() })
             .sorted(by: { $0.key < $1.key })

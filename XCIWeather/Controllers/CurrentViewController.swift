@@ -36,6 +36,12 @@ class CurrentViewController: UIViewController {
                                                selector: #selector(updateWeatherData),
                                                name: .locationUpdated,
                                                object: nil)
+        
+        // observe measurement unit settings change
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateWeatherUi),
+                                               name: UserDefaults.didChangeNotification,
+                                               object: nil)
     }
     
     
@@ -63,7 +69,7 @@ class CurrentViewController: UIViewController {
                                                     sunsetTime: Date(timeIntervalSince1970: TimeInterval(modelData.sys.sunset))
                                                         .toTimeZone(utcOffset: modelData.timezone))
                                                 
-                                                self.updateWeatherUi(data: self.currentWeatherData!)
+                                                self.updateWeatherUi()
                                             }
                                             catch let error {
                                                 print("Failed to parse JSON: \(error.localizedDescription)")
@@ -72,20 +78,24 @@ class CurrentViewController: UIViewController {
     }
 
     
-    func updateWeatherUi(data: CurrentWeather) {
-        locationLabel.text = data.location
-        temperatureLabel.text = data.temperatureString
-        conditionLabel.text = data.weatherConditionsDescription
-        conditionImage.image = data.weatherConditionsStatus
-        updateTimeLabel.text = data.dateTimeString
+    @objc func updateWeatherUi() {
+        if let data = currentWeatherData {
         
-        pressureLabel.text = data.pressureString
-        humidityLabel.text = data.humidityString
-        windLabel.text = data.windString
-        cloudCoverageLabel.text = data.cloudCoverageString
-        
-        sunriseLabel.text = data.sunriseTimeString
-        sunsetLabel.text = data.sunsetTimeString
+            locationLabel.text = data.location
+            temperatureLabel.text = data.temperatureString
+            conditionLabel.text = data.weatherConditionsDescription
+            conditionImage.image = data.weatherConditionsStatus
+            updateTimeLabel.text = data.dateTimeString
+            
+            pressureLabel.text = data.pressureString
+            humidityLabel.text = data.humidityString
+            windLabel.text = data.windString
+            cloudCoverageLabel.text = data.cloudCoverageString
+            
+            sunriseLabel.text = data.sunriseTimeString
+            sunsetLabel.text = data.sunsetTimeString
+            
+        }
     }
     
     /*
