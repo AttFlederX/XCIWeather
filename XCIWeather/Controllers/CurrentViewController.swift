@@ -28,9 +28,11 @@ class CurrentViewController: UIViewController {
     
     var currentWeatherData: CurrentWeather? = nil
     
+    @IBOutlet weak var loadingOverlay: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(updateWeatherData),
@@ -42,11 +44,14 @@ class CurrentViewController: UIViewController {
                                                selector: #selector(updateWeatherUi),
                                                name: UserDefaults.didChangeNotification,
                                                object: nil)
+
     }
     
     
     
     @objc private func updateWeatherData() {
+        loadingOverlay.isHidden = false
+        
         WeatherService.getCurrentWeather(lat: LocationService.currentLocationLatitude, long: LocationService.currentLocationLongitude,
                                          completed: {jsonData in
                                             do {
@@ -70,6 +75,8 @@ class CurrentViewController: UIViewController {
                                                         .toTimeZone(utcOffset: modelData.timezone))
                                                 
                                                 self.updateWeatherUi()
+                                                
+                                                self.loadingOverlay.isHidden = true
                                             }
                                             catch let error {
                                                 print("Failed to parse JSON: \(error.localizedDescription)")
@@ -97,6 +104,8 @@ class CurrentViewController: UIViewController {
             
         }
     }
+    
+
     
     /*
     // MARK: - Navigation

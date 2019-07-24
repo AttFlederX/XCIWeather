@@ -113,6 +113,8 @@ class SettingsTableViewController : UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vcon = self.parent as! SettingsViewController
         vcon.setupPicker(setting: SettingOption(rawValue: indexPath.row)!)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }
@@ -157,8 +159,9 @@ extension SettingsViewController : UIPickerViewDataSource, UIPickerViewDelegate 
         case .speed:
             tableViewController.speedUnitsSetting.text = speedUnits[row]
         default:
-            return
+            break
         }
+        
     }
     
 }

@@ -419,7 +419,7 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Miami, FL, United States" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WOG-Nt-Fq0">
                                                 <rect key="frame" x="24" y="24" width="366" height="24"/>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="20"/>
                                                 <color key="textColor" name="TextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -608,13 +608,46 @@
                                     <constraint firstAttribute="trailing" secondItem="O2n-ZR-oiW" secondAttribute="trailing" constant="24" id="z04-66-aIP"/>
                                 </constraints>
                             </scrollView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eyv-fc-Ir2">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Kex-85-s3n">
+                                        <rect key="frame" x="84.5" y="349.5" width="245" height="26.5"/>
+                                        <subviews>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="hqe-MS-L4m">
+                                                <rect key="frame" x="0.0" y="0.0" width="20" height="26.5"/>
+                                                <color key="color" name="TextColor"/>
+                                            </activityIndicatorView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading weather data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="htj-KV-Un5">
+                                                <rect key="frame" x="36" y="0.0" width="209" height="26.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                <color key="textColor" name="TextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="245" id="Pps-Kr-s60"/>
+                                            <constraint firstAttribute="height" constant="26.5" id="n99-5F-XMt"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" name="PrimaryDarkColor"/>
+                                <constraints>
+                                    <constraint firstItem="Kex-85-s3n" firstAttribute="centerY" secondItem="Eyv-fc-Ir2" secondAttribute="centerY" id="bUo-9G-9QP"/>
+                                    <constraint firstItem="Kex-85-s3n" firstAttribute="centerX" secondItem="Eyv-fc-Ir2" secondAttribute="centerX" id="tv3-XF-cDK"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" name="PrimaryColor"/>
                         <constraints>
+                            <constraint firstItem="Eyv-fc-Ir2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Dag-aU-yVX"/>
                             <constraint firstItem="rof-ti-yCe" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="GQb-n1-Cjd"/>
                             <constraint firstItem="rof-ti-yCe" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="a95-KW-lDE"/>
                             <constraint firstItem="rof-ti-yCe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ipd-Tl-YLG"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Eyv-fc-Ir2" secondAttribute="trailing" id="n53-iU-Fv8"/>
+                            <constraint firstItem="Eyv-fc-Ir2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pDq-TJ-Cy4"/>
                             <constraint firstItem="rof-ti-yCe" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="t06-Ec-xaa"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Eyv-fc-Ir2" secondAttribute="bottom" id="xNt-Ya-f8X"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -624,6 +657,7 @@
                         <outlet property="conditionImage" destination="MkC-IJ-RXa" id="8U7-Yd-YHS"/>
                         <outlet property="conditionLabel" destination="8g2-cC-PE0" id="ocQ-sO-pA0"/>
                         <outlet property="humidityLabel" destination="jrC-g9-ESS" id="L68-lm-yuk"/>
+                        <outlet property="loadingOverlay" destination="Eyv-fc-Ir2" id="bCp-aZ-5IL"/>
                         <outlet property="locationLabel" destination="WOG-Nt-Fq0" id="XmJ-7F-UgE"/>
                         <outlet property="pressureLabel" destination="xj5-jx-glW" id="wPc-4t-Ywm"/>
                         <outlet property="sunriseLabel" destination="Uv3-f7-vhC" id="uj1-Z5-EKc"/>
